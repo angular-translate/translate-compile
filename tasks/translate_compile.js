@@ -65,15 +65,21 @@ module.exports = function(grunt) {
           var value = line.substring(splitterIndex + 1);
           if(context === 'LANGUAGES') {
             languages[''+code] = value; 
-            grunt.log.writeln('language saved '+ JSON.stringify(languages));
           } else {
-            compiled[languages[''+code]+'.'+context] = value;
+            var prop = languages[''+code] + '.' + context;
+            assign(compiled, prop, value);
           }
         } else if (languages.length === 0 && line.indexOf('LANGUAGES') === 0) {
           context = 'LANGUAGES';
           grunt.log.writeln('context changed to '+ context);
         } else if (line.length !== 0) {
           if (line.indexOf("\t") === 0) {
+            var idention = line.split('\t').length - 1;
+            var actualDots = context.split('.').length - 1;
+            if(idention <= actualDots) {
+              context = context.split('.').slice(0, idention).join('.');
+            }
+            grunt.log.writeln('idention '+ idention);
             context += '.' + line.replace(new RegExp('\t', 'g'), '').replace(new RegExp(' ', 'g'), '');
           } else {
             context = line.replace(new RegExp(' ', 'g'), '');
@@ -89,6 +95,18 @@ module.exports = function(grunt) {
     function isValueLine(line) {
       var firstChar = line.replace(new RegExp('\t', 'g'), '').substring(0, 1);
       return !isNaN(parseFloat(firstChar)) && isFinite(firstChar);
+    }
+
+    function assign(obj, prop, value) {
+        if (typeof prop === "string") {
+            prop = prop.split(".");
+        }
+        if (prop.length > 1) {
+            var e = prop.shift();
+            assign(obj[e] = Object.prototype.toString.call(obj[e]) === "[object Object]" ? obj[e] : {}, prop, value);
+        } else {
+            obj[prop[0]] = value;
+        }
     }
 
   });
