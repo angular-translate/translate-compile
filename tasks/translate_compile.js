@@ -16,8 +16,7 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('translate_compile', 'The best Grunt plugin ever.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      // punctuation: '.',
-      // separator: ', '
+      translationVar: 'angTranslations'
     });
 
     // Iterate over all specified file groups.
@@ -38,10 +37,9 @@ module.exports = function(grunt) {
       // .join(grunt.util.normalizelf(options.separator));
 
       // Handle options.
-      // src += options.punctuation;
+      src = 'var ' + options.translationVar + ' = ' + src;
 
       // Write the destination file.
-      grunt.log.writeln('written: ' + src);
       grunt.file.write(f.dest, src);
 
       // Print a success message.
@@ -57,8 +55,6 @@ module.exports = function(grunt) {
       var lines = grunt.file.read(filepath).split('\n');
       for (var lineIndex = 0; lineIndex < lines.length; lineIndex++) {
         var line = lines[lineIndex];
-        grunt.log.writeln(line);
-
         if (isValueLine(line)) {
           var splitterIndex = line.indexOf(':');
           var code = line.substring(0, splitterIndex).replace(new RegExp('\t', 'g'), '');
@@ -71,20 +67,19 @@ module.exports = function(grunt) {
           }
         } else if (languages.length === 0 && line.indexOf('LANGUAGES') === 0) {
           context = 'LANGUAGES';
-          grunt.log.writeln('context changed to '+ context);
         } else if (line.length !== 0) {
           if (line.indexOf("\t") === 0) {
             var idention = line.split('\t').length - 1;
             var actualDots = context.split('.').length - 1;
             if(idention <= actualDots) {
+              grunt.log.writeln('spliting: ' + context);
               context = context.split('.').slice(0, idention).join('.');
+              grunt.log.writeln('done: ' + context);
             }
-            grunt.log.writeln('idention '+ idention);
             context += '.' + line.replace(new RegExp('\t', 'g'), '').replace(new RegExp(' ', 'g'), '');
           } else {
             context = line.replace(new RegExp(' ', 'g'), '');
           }
-          grunt.log.writeln('context changed to '+ context);
         }
       }
 
