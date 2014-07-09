@@ -1,6 +1,6 @@
 /*
  * grunt-translate-compile
- * https://github.com/caina/translate-compile
+ * https://github.com/cainaf/translate-compile
  *
  * Copyright (c) 2014 Cainã Santos
  * Licensed under the MIT license.
@@ -30,11 +30,22 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     translate_compile: {
-      default_options: {
-        options: {
-        },
+      single_file: {
+        options: {},
         files: {
-          'tmp/compiled.js': ['test/fixtures/pre-compiled.tl']
+          'tmp/compiled-single.js': ['test/fixtures/pre-compiled-menu.tl']
+        }
+      },
+      multiple_files: {
+        options: {},
+        files: {
+          'tmp/compiled-multi.js': ['test/fixtures/pre-compiled-menu.tl', 'test/fixtures/pre-compiled-country.tl']
+        }
+      },
+      no_language_legend_file: {
+        options: {},
+        files: {
+          'tmp/compiled-no-lan.js': ['test/fixtures/pre-compiled-menu.tl', 'test/fixtures/pre-compiled-us-states.tl']
         }
       }
     },
@@ -42,7 +53,14 @@ module.exports = function(grunt) {
     // Unit tests.
     nodeunit: {
       tests: ['test/*_test.js']
-    }
+    },
+
+    watch: {
+      scripts: {
+        files: ['tasks/*.js', 'test/*.js'],
+        tasks: ['jshint', 'test']
+      },
+    },
 
   });
 
@@ -53,12 +71,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
   grunt.registerTask('test', ['clean', 'translate_compile', 'nodeunit']);
 
-  // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  // By default, lint and run all tests, then watch any changes made inside tasks dir.
+  grunt.registerTask('default', ['jshint', 'test', 'watch']);
 
 };

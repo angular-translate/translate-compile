@@ -22,18 +22,40 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
+var errorMsg = 'compilation should match the expected compiled file ';
 exports.translate_compile = {
   setUp: function(done) {
     // setup here if necessary
     done();
   },
-  default_options: function(test) {
+  single_file: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/compiled.js');
-    var expected = grunt.file.read('test/expected/compiled.js');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    var compiledFile = 'test/expected/compiled-single.js';
+    var actual = grunt.file.read('tmp/compiled-single.js');
+    var expected = grunt.file.read(compiledFile);
+    test.equal(actual, expected, errorMsg + compiledFile);
 
     test.done();
   },
+  multiple_files: function(test) {
+    test.expect(1);
+
+    var compiledFile = 'test/expected/compiled-multi.js';
+    var actual = grunt.file.read('tmp/compiled-multi.js');
+    var expected = grunt.file.read(compiledFile);
+    test.equal(actual, expected, errorMsg + compiledFile);
+
+    test.done();
+  },
+  no_language_legend_file: function(test) {
+    test.expect(1);
+
+    var compiledFile = 'test/expected/compiled-no-lan.js';
+    var actual = grunt.file.read('tmp/compiled-no-lan.js');
+    var expected = grunt.file.read(compiledFile);
+    test.equal(actual, expected, errorMsg + compiledFile);
+
+    test.done();
+  }
 };
