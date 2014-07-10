@@ -1,6 +1,8 @@
 # grunt-translate-compile
 
 > A pre-compiler for angular-translate based on TL, a simple write-less markup designed for angular-translate.
+> 
+> [Checkout The Translation Markup](#user-content-translation-markup---tl)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -17,75 +19,198 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-translate-compile');
 ```
 
-## Documentation
-**Plugin documentation will be here soon**
+## Translation Markup - TL
 
-<!--
+The translation markup intends to drastically reduce the amount of typing needed to translate your app, by keeping it simpler and improving it's maintenance.
+To learn more about the TL markup, [please refer to the full documentation](http://cainaf.github.io/translate-compile).
+
+Briefing: A translation file begins with the declaration of all supported languages of your application. A custom numeric code (key) must be assigned to each one of the declared languages. In the sample that comes next, we're saying that [american english code is 1], [brazilian portuguese is 2] and [spanish from spain is 3]. Translation values are assigned directly to the language key.
+
+Here goes a sample TL markup code:
+
+```js
+LANGUAGES
+  1:enUs
+  2:ptBr
+  3:esEs
+
+MENU
+  USER
+    LABEL
+      1:User
+      2:Usuário
+      3:Usuario
+    DROPDOWN
+      EDIT
+        1:Edit
+        2,3:Editar
+      LOGOUT
+        1:Logout
+        2:Sair
+        3:Finalizar la Sesión
+  CART
+    EMPTY
+      1:Empty Cart
+      2:Esvaziar Carrinho
+      3:Vaciar Carrito
+    CHECKOUT
+      1:Checkout
+      2:Fechar Pedido
+      3:Realizar Pedido
+```
+
+Compiling the above will result the bellow:
+
+```js
+var angTranslations = {
+  "enUs": {
+    "MENU": {
+      "USER": {
+        "LABEL": "User",
+        "DROPDOWN": {
+          "EDIT": "Edit",
+          "LOGOUT": "Logout"
+        }
+      },
+      "CART": {
+        "EMPTY": "Empty Cart",
+        "CHECKOUT": "Checkout"
+      }
+    }
+  },
+  "ptBr": {
+    "MENU": {
+      "USER": {
+        "LABEL": "Usuário",
+        "DROPDOWN": {
+          "EDIT": "Editar",
+          "LOGOUT": "Sair"
+        }
+      },
+      "CART": {
+        "EMPTY": "Esvaziar Carrinho",
+        "CHECKOUT": "Fechar Pedido"
+      }
+    }
+  },
+  "esEs": {
+    "MENU": {
+      "USER": {
+        "LABEL": "Usuario",
+        "DROPDOWN": {
+          "EDIT": "Editar",
+          "LOGOUT": "Finalizar la Sesión"
+        }
+      },
+      "CART": {
+        "EMPTY": "Vaciar Carrito",
+        "CHECKOUT": "Realizar Pedido"
+      }
+    }
+  }
+};
+```
+Notice how the writing was significantly reduced as it's no longer needed to rewrite every key for each language, we are also skipping blocks and quotes. Thus we can focus in what really matters, the translations. Maintenance is also greatly improved, as adding a new key will no longer be a hunt for the right spot of each language.
+Equal translations are also single written as multiple language keys may be assigned to a value (checkout 'user.dropdown.edit' key).
+
+**Please refer to the [full documentation](http://cainaf.github.io/translate-compile) for more examples and capabilities.**
+
 ## The "translate_compile" task
 
 ### Overview
+
+#### 1. Add the task
 In your project's Gruntfile, add a section named `translate_compile` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
   translate_compile: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+    compile: {
+      options: {
+        // task-specific options go here. refer to options topic
+      },
+      files: {
+        // post-compiling file to the left, pre-compiling files to the right
+        'compiled-translations.js': ['translations/*.tl']
+      }
+    }
+  }
 });
 ```
+#### 2. Let your server know about it
+Remember to include "translate_compile" inside your server task so the compilation takes place when you start it (connect/express). Something like:
+
+```js
+grunt.registerTask('serve', function (target) {
+    grunt.task.run([
+      'clean:server',
+      'translate_compile:compile', // <-- here it is
+      'bowerInstall',
+      'concurrent:server',
+      'autoprefixer',
+      'connect:livereload',
+      'watch'
+    ]);
+  });
+```
+
+#### 3. Watch it
+For a better experience, watch for any changes made to your translation files (requires [grunt-contrib-watch](https://github.com/gruntjs/grunt-contrib-watch)). Something like:
+```js
+watch: {
+  tl: {
+    files: ['translations/*.tl'],
+    tasks: ['translate_compile:compile'],
+    options: {
+      livereload: true
+    }
+  }
+},
+```
+
+#### 4. Take it to your build
+Add the "translate_compile" to your build task. Something like:
+```js
+grunt.registerTask('build', [
+    'clean:dist'
+    'bowerInstall',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'ngmin',
+    'translate_compile:compile', // <-- here it is
+    'copy:dist',
+    'cdnify',
+    'cssmin',
+    'uglify',
+    'rev',
+    'usemin',
+    'htmlmin'
+  ]);
+```
+
+#### You should now be good to go!
 
 ### Options
 
-#### options.separator
+#### options.translationVar
 Type: `String`
-Default value: `',  '`
+Default value: `'angTranslations'`
 
-A string value that is used to do something with whatever.
+Determines the name of the compiled variable. Ex: `var angTranslations = {"usEn":{...}}`
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+#### options.multipleObjects
+Type: `Boolean`
+Default value: `false`
 
-A string value that is used to do something else with whatever else.
+If `multipleObjects` is set to `true` there will no longer be only one root variable like `angTranslations`. Translations will now be splitted into one object per language. Ex: `var enUs = {...}; var ptBr = {...}; var esEs = {...};` Variable names will the ones declared in the `LANGUAGES` section.
 
-### Usage Examples
+#### options.asJson
+Type: `Boolean`
+Default value: `false`
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
-
-```js
-grunt.initConfig({
-  translate_compile: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  translate_compile: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-});
-```
--->
+Should this value be set to true there will be no variable assignment inside the file, only the resulting json will be there.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
