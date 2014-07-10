@@ -21,8 +21,7 @@ MENU
 		DROPDOWN
 			EDIT
 				1:Edit
-				2:Editar
-				3:Editar
+				2,3:Editar
 			LOGOUT
 				1:Logout
 				2:Sair

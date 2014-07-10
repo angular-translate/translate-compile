@@ -10,17 +10,16 @@
 
 module.exports = function(grunt) {
 
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
-  grunt.registerMultiTask('translate_compile', 'The best Grunt plugin ever.', function() {
+  grunt.registerMultiTask('translate_compile', 'A pre-compiler for angular-translate based on TL, a simple write-less markup designed for angular-translate.', function() {
     
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
-      translationVar: 'angTranslations'
+      translationVar: 'angTranslations',
+      multipleObjects: false,
+      asJson: false
     });
 
-    // avaiable contexts
+    // Avaiable compilation contexts
     var c = {
       NONE: 'NONE',
       LANGUAGES: 'LANGUAGES'
@@ -42,17 +41,31 @@ module.exports = function(grunt) {
         return grunt.file.read(filepath);
       }).join('\n');
 
-      // Compile translation markup to json
+      // Compile translation markup
       var compiled = compile(translations);
 
       // Handle options.
-      compiled = 'var ' + options.translationVar + ' = ' + compiled;
+      if(options.asJson) {
+        // no js variables printed
+        compiled = JSON.stringify(compiled);
+      } else if(options.multipleObjects) {
+        // one variable per language
+        var tmp = '';
+        for(var language in compiled) {
+          tmp += 'var ' + language + ' = ' + JSON.stringify(compiled[language]) + ';';
+        }
+        compiled = tmp;
+      } else {
+        // one root variable enclosing all languages
+        compiled = 'var ' + options.translationVar + ' = ' + JSON.stringify(compiled) + ';';
+      }
 
       // Write the destination file.
       grunt.file.write(f.dest, compiled);
 
-      // Print a success message.
+      // Give me five!
       grunt.log.writeln('File "' + f.dest + '" created.');
+
     });
 
     function compile(translations) {
@@ -68,7 +81,7 @@ module.exports = function(grunt) {
 
         var line = lines[lineIndex]; // currunt line
         if(line.replaceAll('\t', '').beginsWith(' ')) {
-          grunt.fail.warn('Please use only tabs for indentation!');
+          grunt.fail.warn('Please use only tabs for indentation! Line: ' + lineIndex);
         }
 
         if (isValueLine(line)) { // go in if it is a translation line (begins with a number)
@@ -81,12 +94,15 @@ module.exports = function(grunt) {
             // stores new declared language
             languages[key] = value; 
           } else {
-            if(!languages[key]) {
-              grunt.fail.warn('No languages were declared!');
+            if(languages.length === 0) {
+              grunt.fail.warn('No languages were declared! Line: ' + lineIndex);
             }
-            // compile translation (value) for language (key)
-            var prop = languages[key] + '.' + context;
-            assign(compiled, prop, value);
+            var keys = key.split(','); // get and iterate over the possible multi-keys applied
+            for(var keyIndex = 0; keyIndex < keys.length; keyIndex++) {
+              // compile and store translation for language (value for key)
+              var prop = languages[keys[keyIndex].trim()] + '.' + context;
+              assign(compiled, prop, value);
+            }
           }
 
         } else if (languages.length === 0 && line.beginsWith('LANGUAGES')) {
@@ -114,11 +130,12 @@ module.exports = function(grunt) {
 
       }
 
-      return JSON.stringify(compiled); // returns json version of the compiled object
+      return compiled; // returns the compiled object
 
     }
 
     function isValueLine(line) {
+      // checks if the first appearing value is a number
       var firstChar = line.replaceAll('\t', '').substring(0, 1);
       return !isNaN(parseFloat(firstChar)) && isFinite(firstChar);
     }

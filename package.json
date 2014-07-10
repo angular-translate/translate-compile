@@ -1,6 +1,6 @@
 {
   "name": "grunt-translate-compile",
-  "description": "The best Grunt plugin ever.",
+  "description": "A pre-compiler for angular-translate based on TL, a simple write-less markup designed for angular-translate.",
   "version": "0.1.0",
   "homepage": "https://github.com/cainaf/translate-compile",
   "author": {

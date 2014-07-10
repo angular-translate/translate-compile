@@ -37,15 +37,27 @@ module.exports = function(grunt) {
         }
       },
       multiple_files: {
-        options: {},
+        options: {
+          translationVar: 'tl'
+        },
         files: {
           'tmp/compiled-multi.js': ['test/fixtures/pre-compiled-menu.tl', 'test/fixtures/pre-compiled-country.tl']
         }
       },
       no_language_legend_file: {
-        options: {},
+        options: {
+          asJson: true
+        },
         files: {
-          'tmp/compiled-no-lan.js': ['test/fixtures/pre-compiled-menu.tl', 'test/fixtures/pre-compiled-us-states.tl']
+          'tmp/compiled-no-lan.json': ['test/fixtures/pre-compiled-menu.tl', 'test/fixtures/pre-compiled-us-states.tl']
+        }
+      },
+      aggregate_keys: {
+        options: {
+          multipleObjects: true
+        },
+        files: {
+          'tmp/compiled-aggregate-keys.js': ['test/fixtures/pre-compiled-country.tl', 'test/fixtures/pre-compiled-us-states.tl']
         }
       }
     },

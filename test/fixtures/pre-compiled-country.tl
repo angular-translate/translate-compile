@@ -7,8 +7,7 @@ COUNTRY
 	USA
 		NAME
 			1:United States
-			2:Estados Unidos
-			3:Estados Unidos
+			2,3:Estados Unidos
 		LANGUAGE
 			1:English
 			2:Inglês
@@ -16,8 +15,7 @@ COUNTRY
 	BRAZIL
 		NAME
 			1:Brazil
-			2:Brasil
-			3:Brasil
+			2,3:Brasil
 		LANGUAGE
 			1:Portuguese
 			2:Português

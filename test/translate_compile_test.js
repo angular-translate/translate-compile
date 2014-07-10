@@ -25,7 +25,6 @@ var grunt = require('grunt');
 var errorMsg = 'compilation should match the expected compiled file ';
 exports.translate_compile = {
   setUp: function(done) {
-    // setup here if necessary
     done();
   },
   single_file: function(test) {
@@ -51,8 +50,18 @@ exports.translate_compile = {
   no_language_legend_file: function(test) {
     test.expect(1);
 
-    var compiledFile = 'test/expected/compiled-no-lan.js';
-    var actual = grunt.file.read('tmp/compiled-no-lan.js');
+    var compiledFile = 'test/expected/compiled-no-lan.json';
+    var actual = grunt.file.read('tmp/compiled-no-lan.json');
+    var expected = grunt.file.read(compiledFile);
+    test.equal(actual, expected, errorMsg + compiledFile);
+
+    test.done();
+  },
+  aggregate_keys: function(test) {
+    test.expect(1);
+
+    var compiledFile = 'test/expected/compiled-aggregate-keys.js';
+    var actual = grunt.file.read('tmp/compiled-aggregate-keys.js');
     var expected = grunt.file.read(compiledFile);
     test.equal(actual, expected, errorMsg + compiledFile);
 

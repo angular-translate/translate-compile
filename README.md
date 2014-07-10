@@ -1,6 +1,6 @@
 # grunt-translate-compile
 
-> The best Grunt plugin ever.
+> A pre-compiler for angular-translate based on TL, a simple write-less markup designed for angular-translate.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
@@ -17,6 +17,9 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-translate-compile');
 ```
 
+**Plugin documentation will be here soon**
+
+<!--
 ## The "translate_compile" task
 
 ### Overview
@@ -81,6 +84,7 @@ grunt.initConfig({
   },
 });
 ```
+-->
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
