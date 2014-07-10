@@ -59,6 +59,11 @@ module.exports = function(grunt) {
         files: {
           'tmp/compiled-aggregate-keys.js': ['test/fixtures/pre-compiled-country.tl', 'test/fixtures/pre-compiled-us-states.tl']
         }
+      },
+      multi_files_with_pattern: {
+        files: {
+          'tmp/compiled-multi-pattern.js': ['test/fixtures/*.tl']
+        }
       }
     },
 

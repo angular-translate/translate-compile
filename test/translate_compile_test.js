@@ -66,5 +66,15 @@ exports.translate_compile = {
     test.equal(actual, expected, errorMsg + compiledFile);
 
     test.done();
+  },
+  multi_files_with_pattern: function(test) {
+    test.expect(1);
+
+    var compiledFile = 'test/expected/compiled-multi-pattern.js';
+    var actual = grunt.file.read('tmp/compiled-multi-pattern.js');
+    var expected = grunt.file.read(compiledFile);
+    test.equal(actual, expected, errorMsg + compiledFile);
+
+    test.done();
   }
 };
