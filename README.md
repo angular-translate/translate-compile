@@ -17,6 +17,7 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-translate-compile');
 ```
 
+## Documentation
 **Plugin documentation will be here soon**
 
 <!--
