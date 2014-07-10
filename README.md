@@ -1,8 +1,6 @@
 # grunt-translate-compile
 
 > A pre-compiler for angular-translate based on TL, a simple write-less markup designed for angular-translate.
-> 
-> [Checkout The Translation Markup](#user-content-translation-markup---tl)
 
 ## Getting Started
 This plugin requires Grunt `~0.4.5`
