@@ -2,6 +2,21 @@
 
 > A pre-compiler for angular-translate based on TL: a simple write-less markup specially designed for angular-translate.
 
+## Getting Started
+This plugin requires Grunt `~0.4.5`
+
+If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
+
+```shell
+npm install grunt-translate-compile --save-dev
+```
+
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+
+```js
+grunt.loadNpmTasks('grunt-translate-compile');
+```
+
 ## Translation Markup - TL
 
 The translation markup intends to drastically reduce the amount of typing needed to translate your app, by keeping it simpler and improving it's maintenance.
@@ -97,22 +112,6 @@ Notice how the writing was significantly reduced as it's no longer needed to rew
 Equal translations are also single written as multiple language keys may be assigned to a value (checkout 'user.dropdown.edit' key).
 
 **Please refer to the [full documentation](http://cainaf.github.io/translate-compile) for more examples and capabilities.**
-
-
-## Getting Started
-This plugin requires Grunt `~0.4.5`
-
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
-
-```shell
-npm install grunt-translate-compile --save-dev
-```
-
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
-
-```js
-grunt.loadNpmTasks('grunt-translate-compile');
-```
 
 
 ## The "translate_compile" task
