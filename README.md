@@ -108,7 +108,7 @@ var angTranslations = {
   }
 };
 ```
-Notice how the writing was significantly reduced as it's no longer needed to rewrite every key for each language, we are also skipping blocks and quotes. Thus we can focus in what really matters, the translations. Maintenance is also greatly improved, as adding a new key will no longer be a hunt for the right spot of each language.
+Notice how the writing was significantly reduced as it's no longer needed to rewrite every key for each language, we are also skipping blocks and quotes. Thus we can focus on what really matters, the translations. Maintenance is also greatly improved, as adding a new key will no longer be a hunt for the right spot of each language.
 Equal translations are also single written as multiple language keys may be assigned to a value (checkout 'user.dropdown.edit' key).
 
 **Please refer to the [full documentation](http://cainaf.github.io/translate-compile) for more examples and capabilities.**
