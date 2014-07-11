@@ -1,69 +1,283 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="translate-compile : angular-translate angular pre-compiler markup translate-compile grunt plugin" />
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>translate-compile by cainaf</title>
+    <title>translate-compile</title>
   </head>
 
   <body>
-    <header>
-      <div class="inner">
-        <h1>translate-compile</h1>
-        <h2>angular-translate angular pre-compiler markup translate-compile grunt plugin</h2>
-        <a href="https://github.com/cainaf/translate-compile" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h3>
-<a name="this-doc-is-being-updated-to-better-describe-tl-markup-language" class="anchor" href="#this-doc-is-being-updated-to-better-describe-tl-markup-language"><span class="octicon octicon-link"></span></a>This doc is being updated to better describe TL markup language.</h3>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/cainaf/translate-compile">View on GitHub</a>
 
-<h1>
+          <h1 id="project_title">translate-compile</h1>
+          <h2 id="project_tagline">angular-translate angular pre-compiler markup translate-compile grunt plugin</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/cainaf/translate-compile/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/cainaf/translate-compile/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
 <a name="grunt-translate-compile" class="anchor" href="#grunt-translate-compile"><span class="octicon octicon-link"></span></a>grunt-translate-compile</h1>
 
 <blockquote>
-<p>A pre-compiler for angular-translate based on TL, a simple write-less markup designed for angular-translate.</p>
-
-<p><a href="#user-content-translation-markup---tl">Checkout The Translation Markup</a></p>
+<p>A pre-compiler for angular-translate based on TL: a simple write-less markup specially designed for angular-translate.</p>
 </blockquote>
 
-<h2>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+<ul>
+<li>
+<a href="#user-content-1-translation-markup---tl">1. Translation Markup - TL</a>
 
-<p>This plugin requires Grunt <code>~0.4.5</code></p>
+<ul>
+<li><a href="#user-content-11-hello-world-from-tl">1.1 - Hello World from TL</a></li>
+<li><a href="#user-content-12-type-translations-keys-only-once-for-all-your-languages">1.2 - Type translations keys only once for all your languages</a></li>
+<li><a href="#user-content-13-type-repeated-translation-values-only-once-too">1.3 - Type repeated translation values only once too</a></li>
+<li><a href="#user-content-14-organize-your-translations-into-multiple-files">1.4 - Organize your translations into multiple files</a></li>
+</ul>
+</li>
+<li>
+<a href="#user-content-2-grunt-plugin">2. Grunt Plugin</a>
 
-<p>If you haven't used <a href="http://gruntjs.com/">Grunt</a> before, be sure to check out the <a href="http://gruntjs.com/getting-started">Getting Started</a> guide, as it explains how to create a <a href="http://gruntjs.com/sample-gruntfile">Gruntfile</a> as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:</p>
+<ul>
+<li><a href="#user-content-21-getting-started">2.1 - Getting Started</a></li>
+<li><a href="#user-content-22-the-translate_compile-task---overview">2.2 - The "translate_compile" task - Overview</a></li>
+<li><a href="#user-content-23-options">2.3 - Options</a></li>
+</ul>
+</li>
+</ul><h2>
+<a name="1-translation-markup---tl" class="anchor" href="#1-translation-markup---tl"><span class="octicon octicon-link"></span></a>1. Translation Markup - TL</h2>
 
-<pre lang="shell"><code>npm install grunt-translate-compile --save-dev
-</code></pre>
-
-<p>Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:</p>
-
-<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-translate-compile'</span><span class="p">);</span>
-</pre></div>
-
-<h2>
-<a name="translation-markup---tl" class="anchor" href="#translation-markup---tl"><span class="octicon octicon-link"></span></a>Translation Markup - TL</h2>
-
-<p>The translation markup intends to drastically reduce the amount of typing needed to translate your app, by keeping it simpler and improving it's maintenance.
-To learn more about the TL markup, <a href="http://cainaf.github.io/translate-compile">please refer to the full documentation</a>.</p>
+<p>The translation markup intends to drastically reduce the amount of typing needed to translate your app, by keeping it simpler and improving it's maintenance.</p>
 
 <p>Briefing: A translation file begins with the declaration of all supported languages of your application. A custom numeric code (key) must be assigned to each one of the declared languages. In the sample that comes next, we're saying that [american english code is 1], [brazilian portuguese is 2] and [spanish from spain is 3]. Translation values are assigned directly to the language key.</p>
 
-<p>Here goes a sample TL markup code:</p>
+<blockquote>
+<p><strong>Tabs must be used for indentation. Spaces are not yet allowed.</strong>
+<strong>Indentation must be respected to avoid unwanted results.</strong></p>
+</blockquote>
+
+<h3>
+<a name="11---hello-world-from-tl" class="anchor" href="#11---hello-world-from-tl"><span class="octicon octicon-link"></span></a>1.1 - Hello World from TL</h3>
+
+<div class="highlight highlight-js"><pre><span class="nx">LANGUAGES</span>
+  <span class="mi">1</span><span class="o">:</span><span class="nx">english</span>
+  <span class="mi">2</span><span class="o">:</span><span class="nx">deutsch</span>
+
+<span class="nx">HELLO</span>
+  <span class="nx">WORLD</span>
+    <span class="mi">1</span><span class="o">:</span><span class="nx">Hello</span> <span class="nx">World</span>
+    <span class="mi">2</span><span class="o">:</span><span class="nx">Hallo</span> <span class="nx">Welt</span>
+</pre></div>
+
+<p><strong>Compiled:</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">angTranslations</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"english"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"HELLO"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"WORLD"</span><span class="o">:</span> <span class="s2">"Hello World"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"deutsch"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"HELLO"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"WORLD"</span><span class="o">:</span> <span class="s2">"Hallo Welt"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+<h3>
+<a name="12---type-translations-keys-only-once-for-all-your-languages" class="anchor" href="#12---type-translations-keys-only-once-for-all-your-languages"><span class="octicon octicon-link"></span></a>1.2 - Type translations keys only once for all your languages</h3>
+
+<pre><code>LANGUAGES
+  1:english
+  2:deutsch
+  3:spanish
+  4:portuguese
+
+UNITED_STATES
+  NAME
+    1:United States
+    2:Vereinigte Staaten
+    3,4:Estados Unidos
+  LANGUAGE
+    1:English
+    2:Englisch
+    3:Inglés
+    4:Inglês
+SPAIN
+  NAME
+    1:Spain
+    2:Spanien
+    3:España
+    4:Espanha
+  LANGUAGE
+    1:Spanish
+    2:Spanisch
+    3:Español
+    4:Espanhol
+BRAZIL
+  NAME
+    1:Brazil
+    2:Brasilien
+    3,4:Brasil
+  LANGUAGE
+    1:Portuguese
+    2:Portugiesisch
+    3:Portugués
+    4:Português
+</code></pre>
+
+<p><strong>Compiled:</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">angTranslations</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"english"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"UNITED_STATES"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"United States"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"English"</span>
+    <span class="p">},</span>
+    <span class="s2">"SPAIN"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Spain"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Spanish"</span>
+    <span class="p">},</span>
+    <span class="s2">"BRAZIL"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Brazil"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Portuguese"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"deutsch"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"UNITED_STATES"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Vereinigte Staaten"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Englisch"</span>
+    <span class="p">},</span>
+    <span class="s2">"SPAIN"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Spanien"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Spanisch"</span>
+    <span class="p">},</span>
+    <span class="s2">"BRAZIL"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Brasilien"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Portugiesisch"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"spanish"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"UNITED_STATES"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Estados Unidos"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Inglés"</span>
+    <span class="p">},</span>
+    <span class="s2">"SPAIN"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"España"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Español"</span>
+    <span class="p">},</span>
+    <span class="s2">"BRAZIL"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Brasil"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Portugués"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"portuguese"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"UNITED_STATES"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Estados Unidos"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Inglês"</span>
+    <span class="p">},</span>
+    <span class="s2">"SPAIN"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Espanha"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Espanhol"</span>
+    <span class="p">},</span>
+    <span class="s2">"BRAZIL"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Brasil"</span><span class="p">,</span>
+      <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Português"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+<blockquote>
+<p>Notice how the writing was significantly reduced as it's no longer needed to rewrite every key for each language, we are also skipping blocks and quotes. Thus we can focus on what really matters: the translations. Maintenance is also greatly improved, as adding a new key will no longer be a hunt for the right spot of each language.</p>
+</blockquote>
+
+<h3>
+<a name="13---type-repeated-translation-values-only-once-too" class="anchor" href="#13---type-repeated-translation-values-only-once-too"><span class="octicon octicon-link"></span></a>1.3 - Type repeated translation values only once too</h3>
+
+<div class="highlight highlight-js"><pre><span class="nx">LANGUAGES</span>
+  <span class="mi">1</span><span class="o">:</span><span class="nx">enUS</span>
+  <span class="mi">2</span><span class="o">:</span><span class="nx">ptBR</span>
+  <span class="mi">3</span><span class="o">:</span><span class="nx">esES</span>
+
+<span class="nx">CREDIT_CARD</span>
+  <span class="nx">NAME</span>
+    <span class="mi">1</span><span class="o">:</span><span class="nx">Credit</span> <span class="nx">Card</span>
+    <span class="mi">2</span><span class="o">:</span><span class="nx">Cart</span><span class="err">ã</span><span class="nx">o</span> <span class="nx">de</span> <span class="nx">Cr</span><span class="err">é</span><span class="nx">dito</span>
+    <span class="mi">3</span><span class="o">:</span><span class="nx">Tarjeta</span> <span class="nx">de</span> <span class="nx">Cr</span><span class="err">é</span><span class="nx">dito</span>
+  <span class="nx">FLAG</span>
+    <span class="nx">VISA</span>
+      <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">Visa</span>
+    <span class="nx">MASTERCARD</span>
+      <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">Mastercard</span>
+    <span class="nx">AMEX</span>
+      <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">American</span> <span class="nx">Express</span>
+    <span class="nx">DINERS</span>
+      <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">Diners</span>
+</pre></div>
+
+<p><strong>Compiled:</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">angTranslations</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"enUS"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"CREDIT_CARD"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Credit Card"</span><span class="p">,</span>
+      <span class="s2">"FLAG"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"VISA"</span><span class="o">:</span> <span class="s2">"Visa"</span><span class="p">,</span>
+        <span class="s2">"MASTERCARD"</span><span class="o">:</span> <span class="s2">"Mastercard"</span><span class="p">,</span>
+        <span class="s2">"AMEX"</span><span class="o">:</span> <span class="s2">"American Express"</span><span class="p">,</span>
+        <span class="s2">"DINERS"</span><span class="o">:</span> <span class="s2">"Diners"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"ptBR"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"CREDIT_CARD"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Cartão de Crédito"</span><span class="p">,</span>
+      <span class="s2">"FLAG"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"VISA"</span><span class="o">:</span> <span class="s2">"Visa"</span><span class="p">,</span>
+        <span class="s2">"MASTERCARD"</span><span class="o">:</span> <span class="s2">"Mastercard"</span><span class="p">,</span>
+        <span class="s2">"AMEX"</span><span class="o">:</span> <span class="s2">"American Express"</span><span class="p">,</span>
+        <span class="s2">"DINERS"</span><span class="o">:</span> <span class="s2">"Diners"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">"esES"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"CREDIT_CARD"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Tarjeta de Crédito"</span><span class="p">,</span>
+      <span class="s2">"FLAG"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"VISA"</span><span class="o">:</span> <span class="s2">"Visa"</span><span class="p">,</span>
+        <span class="s2">"MASTERCARD"</span><span class="o">:</span> <span class="s2">"Mastercard"</span><span class="p">,</span>
+        <span class="s2">"AMEX"</span><span class="o">:</span> <span class="s2">"American Express"</span><span class="p">,</span>
+        <span class="s2">"DINERS"</span><span class="o">:</span> <span class="s2">"Diners"</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+<h3>
+<a name="14---organize-your-translations-into-multiple-files" class="anchor" href="#14---organize-your-translations-into-multiple-files"><span class="octicon octicon-link"></span></a>1.4 - Organize your translations into multiple files</h3>
+
+<blockquote>
+<p>Although we recommend you to include language declarations in all your translation files, they are only required in the first read translation file. Language declarations will often serve you as legend for language keys/values.</p>
+</blockquote>
+
+<p><strong>File 1: menu.tl</strong></p>
 
 <div class="highlight highlight-js"><pre><span class="nx">LANGUAGES</span>
   <span class="mi">1</span><span class="o">:</span><span class="nx">enUs</span>
@@ -71,6 +285,15 @@ To learn more about the TL markup, <a href="http://cainaf.github.io/translate-co
   <span class="mi">3</span><span class="o">:</span><span class="nx">esEs</span>
 
 <span class="nx">MENU</span>
+  <span class="nx">CART</span>
+    <span class="nx">EMPTY</span>
+      <span class="mi">1</span><span class="o">:</span><span class="nx">Empty</span> <span class="nx">Cart</span>
+      <span class="mi">2</span><span class="o">:</span><span class="nx">Esvaziar</span> <span class="nx">Carrinho</span>
+      <span class="mi">3</span><span class="o">:</span><span class="nx">Vaciar</span> <span class="nx">Carrito</span>
+    <span class="nx">CHECKOUT</span>
+      <span class="mi">1</span><span class="o">:</span><span class="nx">Checkout</span>
+      <span class="mi">2</span><span class="o">:</span><span class="nx">Fechar</span> <span class="nx">Pedido</span>
+      <span class="mi">3</span><span class="o">:</span><span class="nx">Realizar</span> <span class="nx">Pedido</span>
   <span class="nx">USER</span>
     <span class="nx">LABEL</span>
       <span class="mi">1</span><span class="o">:</span><span class="nx">User</span>
@@ -84,78 +307,230 @@ To learn more about the TL markup, <a href="http://cainaf.github.io/translate-co
         <span class="mi">1</span><span class="o">:</span><span class="nx">Logout</span>
         <span class="mi">2</span><span class="o">:</span><span class="nx">Sair</span>
         <span class="mi">3</span><span class="o">:</span><span class="nx">Finalizar</span> <span class="nx">la</span> <span class="nx">Sesi</span><span class="err">ó</span><span class="nx">n</span>
-  <span class="nx">CART</span>
-    <span class="nx">EMPTY</span>
-      <span class="mi">1</span><span class="o">:</span><span class="nx">Empty</span> <span class="nx">Cart</span>
-      <span class="mi">2</span><span class="o">:</span><span class="nx">Esvaziar</span> <span class="nx">Carrinho</span>
-      <span class="mi">3</span><span class="o">:</span><span class="nx">Vaciar</span> <span class="nx">Carrito</span>
-    <span class="nx">CHECKOUT</span>
-      <span class="mi">1</span><span class="o">:</span><span class="nx">Checkout</span>
-      <span class="mi">2</span><span class="o">:</span><span class="nx">Fechar</span> <span class="nx">Pedido</span>
-      <span class="mi">3</span><span class="o">:</span><span class="nx">Realizar</span> <span class="nx">Pedido</span>
 </pre></div>
 
-<p>Compiling the above will result the bellow:</p>
+<p><strong>File 2: country.tl</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="nx">LANGUAGES</span>
+  <span class="mi">1</span><span class="o">:</span><span class="nx">enUs</span>
+  <span class="mi">2</span><span class="o">:</span><span class="nx">ptBr</span>
+  <span class="mi">3</span><span class="o">:</span><span class="nx">esEs</span>
+
+<span class="nx">COUNTRY</span>
+  <span class="nx">USA</span>
+    <span class="nx">NAME</span>
+      <span class="mi">1</span><span class="o">:</span><span class="nx">United</span> <span class="nx">States</span>
+      <span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">Estados</span> <span class="nx">Unidos</span>
+    <span class="nx">LANGUAGE</span>
+      <span class="mi">1</span><span class="o">:</span><span class="nx">English</span>
+      <span class="mi">2</span><span class="o">:</span><span class="nx">Ingl</span><span class="err">ê</span><span class="nx">s</span>
+      <span class="mi">3</span><span class="o">:</span><span class="nx">Ingl</span><span class="err">é</span><span class="nx">s</span>
+  <span class="nx">BRAZIL</span>
+    <span class="nx">NAME</span>
+      <span class="mi">1</span><span class="o">:</span><span class="nx">Brazil</span>
+      <span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">Brasil</span>
+    <span class="nx">LANGUAGE</span>
+      <span class="mi">1</span><span class="o">:</span><span class="nx">Portuguese</span>
+      <span class="mi">2</span><span class="o">:</span><span class="nx">Portugu</span><span class="err">ê</span><span class="nx">s</span>
+      <span class="mi">3</span><span class="o">:</span><span class="nx">Portugu</span><span class="err">é</span><span class="nx">s</span>
+  <span class="nx">SPAIN</span>
+    <span class="nx">NAME</span>
+      <span class="mi">1</span><span class="o">:</span><span class="nx">Spain</span>
+      <span class="mi">2</span><span class="o">:</span><span class="nx">Espanha</span>
+      <span class="mi">3</span><span class="o">:</span><span class="nx">Espa</span><span class="err">ñ</span><span class="nx">a</span>
+    <span class="nx">LANGUAGE</span>
+      <span class="mi">1</span><span class="o">:</span><span class="nx">Spanish</span>
+      <span class="mi">2</span><span class="o">:</span><span class="nx">Espanhol</span>
+      <span class="mi">3</span><span class="o">:</span><span class="nx">Espa</span><span class="err">ñ</span><span class="nx">ol</span>
+</pre></div>
+
+<p><strong>File 3: us-states.tl</strong></p>
+
+<div class="highlight highlight-js"><pre><span class="nx">LANGUAGES</span>
+  <span class="mi">1</span><span class="o">:</span><span class="nx">enUs</span>
+  <span class="mi">2</span><span class="o">:</span><span class="nx">ptBr</span>
+  <span class="mi">3</span><span class="o">:</span><span class="nx">esEs</span>
+
+<span class="nx">COUNTRY</span>
+  <span class="nx">USA</span>
+    <span class="nx">STATES</span>
+      <span class="nx">CALIFORNIA</span>
+        <span class="nx">NAME</span>
+          <span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">California</span>
+          <span class="mi">2</span><span class="o">:</span><span class="nx">Calif</span><span class="err">ó</span><span class="nx">rnia</span>
+        <span class="nx">ACRONYM</span>
+          <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">CA</span>
+      <span class="nx">NEW_YORK</span>
+        <span class="nx">NAME</span>
+          <span class="mi">1</span><span class="o">:</span><span class="nx">New</span> <span class="nx">York</span>
+          <span class="mi">2</span><span class="o">:</span><span class="nx">Nova</span> <span class="nx">Iorque</span>
+          <span class="mi">3</span><span class="o">:</span><span class="nx">Nueva</span> <span class="nx">York</span>
+        <span class="nx">ACRONYM</span>
+          <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">NY</span>
+      <span class="nx">NORTH_CAROLINA</span>
+        <span class="nx">NAME</span>
+          <span class="mi">1</span><span class="o">:</span><span class="nx">North</span> <span class="nx">Carolina</span>
+          <span class="mi">2</span><span class="o">:</span><span class="nx">Carolina</span> <span class="nx">Do</span> <span class="nx">Norte</span>
+          <span class="mi">3</span><span class="o">:</span><span class="nx">Carolina</span> <span class="nx">del</span> <span class="nx">Norte</span>
+        <span class="nx">ACRONYM</span>
+          <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="o">:</span><span class="nx">NC</span>
+</pre></div>
+
+<p><strong>Compiled Result:</strong></p>
 
 <div class="highlight highlight-js"><pre><span class="kd">var</span> <span class="nx">angTranslations</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"enUs"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"COUNTRY"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"USA"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"United States"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"English"</span><span class="p">,</span>
+        <span class="s2">"STATES"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">"CALIFORNIA"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"California"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"CA"</span>
+          <span class="p">},</span>
+          <span class="s2">"NEW_YORK"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"New York"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"NY"</span>
+          <span class="p">},</span>
+          <span class="s2">"NORTH_CAROLINA"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"North Carolina"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"NC"</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">"BRAZIL"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Brazil"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Portuguese"</span>
+      <span class="p">},</span>
+      <span class="s2">"SPAIN"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Spain"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Spanish"</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
     <span class="s2">"MENU"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"CART"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"EMPTY"</span><span class="o">:</span> <span class="s2">"Empty Cart"</span><span class="p">,</span>
+        <span class="s2">"CHECKOUT"</span><span class="o">:</span> <span class="s2">"Checkout"</span>
+      <span class="p">},</span>
       <span class="s2">"USER"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"LABEL"</span><span class="o">:</span> <span class="s2">"User"</span><span class="p">,</span>
         <span class="s2">"DROPDOWN"</span><span class="o">:</span> <span class="p">{</span>
           <span class="s2">"EDIT"</span><span class="o">:</span> <span class="s2">"Edit"</span><span class="p">,</span>
           <span class="s2">"LOGOUT"</span><span class="o">:</span> <span class="s2">"Logout"</span>
         <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s2">"CART"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">"EMPTY"</span><span class="o">:</span> <span class="s2">"Empty Cart"</span><span class="p">,</span>
-        <span class="s2">"CHECKOUT"</span><span class="o">:</span> <span class="s2">"Checkout"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">"ptBr"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"COUNTRY"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"USA"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Estados Unidos"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Inglês"</span><span class="p">,</span>
+        <span class="s2">"STATES"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">"CALIFORNIA"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Califórnia"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"CA"</span>
+          <span class="p">},</span>
+          <span class="s2">"NEW_YORK"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Nova Iorque"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"NY"</span>
+          <span class="p">},</span>
+          <span class="s2">"NORTH_CAROLINA"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Carolina Do Norte"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"NC"</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">"BRAZIL"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Brasil"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Português"</span>
+      <span class="p">},</span>
+      <span class="s2">"SPAIN"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Espanha"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Espanhol"</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
     <span class="s2">"MENU"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"CART"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"EMPTY"</span><span class="o">:</span> <span class="s2">"Esvaziar Carrinho"</span><span class="p">,</span>
+        <span class="s2">"CHECKOUT"</span><span class="o">:</span> <span class="s2">"Fechar Pedido"</span>
+      <span class="p">},</span>
       <span class="s2">"USER"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"LABEL"</span><span class="o">:</span> <span class="s2">"Usuário"</span><span class="p">,</span>
         <span class="s2">"DROPDOWN"</span><span class="o">:</span> <span class="p">{</span>
           <span class="s2">"EDIT"</span><span class="o">:</span> <span class="s2">"Editar"</span><span class="p">,</span>
           <span class="s2">"LOGOUT"</span><span class="o">:</span> <span class="s2">"Sair"</span>
         <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s2">"CART"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">"EMPTY"</span><span class="o">:</span> <span class="s2">"Esvaziar Carrinho"</span><span class="p">,</span>
-        <span class="s2">"CHECKOUT"</span><span class="o">:</span> <span class="s2">"Fechar Pedido"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">"esEs"</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">"COUNTRY"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"USA"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Estados Unidos"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Inglés"</span><span class="p">,</span>
+        <span class="s2">"STATES"</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">"CALIFORNIA"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"California"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"CA"</span>
+          <span class="p">},</span>
+          <span class="s2">"NEW_YORK"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Nueva York"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"NY"</span>
+          <span class="p">},</span>
+          <span class="s2">"NORTH_CAROLINA"</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Carolina del Norte"</span><span class="p">,</span>
+            <span class="s2">"ACRONYM"</span><span class="o">:</span> <span class="s2">"NC"</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">"BRAZIL"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"Brasil"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Portugués"</span>
+      <span class="p">},</span>
+      <span class="s2">"SPAIN"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"NAME"</span><span class="o">:</span> <span class="s2">"España"</span><span class="p">,</span>
+        <span class="s2">"LANGUAGE"</span><span class="o">:</span> <span class="s2">"Español"</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
     <span class="s2">"MENU"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"CART"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"EMPTY"</span><span class="o">:</span> <span class="s2">"Vaciar Carrito"</span><span class="p">,</span>
+        <span class="s2">"CHECKOUT"</span><span class="o">:</span> <span class="s2">"Realizar Pedido"</span>
+      <span class="p">},</span>
       <span class="s2">"USER"</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">"LABEL"</span><span class="o">:</span> <span class="s2">"Usuario"</span><span class="p">,</span>
         <span class="s2">"DROPDOWN"</span><span class="o">:</span> <span class="p">{</span>
           <span class="s2">"EDIT"</span><span class="o">:</span> <span class="s2">"Editar"</span><span class="p">,</span>
           <span class="s2">"LOGOUT"</span><span class="o">:</span> <span class="s2">"Finalizar la Sesión"</span>
         <span class="p">}</span>
-      <span class="p">},</span>
-      <span class="s2">"CART"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">"EMPTY"</span><span class="o">:</span> <span class="s2">"Vaciar Carrito"</span><span class="p">,</span>
-        <span class="s2">"CHECKOUT"</span><span class="o">:</span> <span class="s2">"Realizar Pedido"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
 
-<p>Notice how the writing was significantly reduced as it's no longer needed to rewrite every key for each language, we are also skipping blocks and quotes. Thus we can focus in what really matters, the translations. Maintenance is also greatly improved, as adding a new key will no longer be a hunt for the right spot of each language.
-Equal translations are also single written as multiple language keys may be assigned to a value (checkout 'user.dropdown.edit' key).</p>
-
-<p><strong>Please refer to the <a href="http://cainaf.github.io/translate-compile">full documentation</a> for more examples and capabilities.</strong></p>
-
 <h2>
-<a name="the-translate_compile-task" class="anchor" href="#the-translate_compile-task"><span class="octicon octicon-link"></span></a>The "translate_compile" task</h2>
+<a name="2-grunt-plugin" class="anchor" href="#2-grunt-plugin"><span class="octicon octicon-link"></span></a>2. Grunt Plugin</h2>
 
 <h3>
-<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h3>
+<a name="21---getting-started" class="anchor" href="#21---getting-started"><span class="octicon octicon-link"></span></a>2.1 - Getting Started</h3>
+
+<p>This plugin requires Grunt <code>~0.4.5</code></p>
+
+<p>If you haven't used <a href="http://gruntjs.com/">Grunt</a> before, be sure to check out the <a href="http://gruntjs.com/getting-started">Getting Started</a> guide, as it explains how to create a <a href="http://gruntjs.com/sample-gruntfile">Gruntfile</a> as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:</p>
+
+<pre lang="shell"><code>npm install grunt-translate-compile --save-dev
+</code></pre>
+
+<p>Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-translate-compile'</span><span class="p">);</span>
+</pre></div>
+
+<h3>
+<a name="22---the-translate_compile-task---overview" class="anchor" href="#22---the-translate_compile-task---overview"><span class="octicon octicon-link"></span></a>2.2 - The "translate_compile" task - Overview</h3>
 
 <h4>
 <a name="1-add-the-task" class="anchor" href="#1-add-the-task"><span class="octicon octicon-link"></span></a>1. Add the task</h4>
@@ -212,7 +587,7 @@ Equal translations are also single written as multiple language keys may be assi
 </pre></div>
 
 <h4>
-<a name="4-take-it-to-your-build" class="anchor" href="#4-take-it-to-your-build"><span class="octicon octicon-link"></span></a>4. Take it to your build</h4>
+<a name="4-take-to-your-build" class="anchor" href="#4-take-to-your-build"><span class="octicon octicon-link"></span></a>4. Take to your build</h4>
 
 <p>Add the "translate_compile" to your build task. Something like:</p>
 
@@ -235,11 +610,10 @@ Equal translations are also single written as multiple language keys may be assi
   <span class="p">]);</span>
 </pre></div>
 
-<h4>
-<a name="you-should-now-be-good-to-go" class="anchor" href="#you-should-now-be-good-to-go"><span class="octicon octicon-link"></span></a>You should now be good to go!</h4>
+<p><strong>You should now be good to go!</strong></p>
 
 <h3>
-<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h3>
+<a name="23---options" class="anchor" href="#23---options"><span class="octicon octicon-link"></span></a>2.3 - Options</h3>
 
 <h4>
 <a name="optionstranslationvar" class="anchor" href="#optionstranslationvar"><span class="octicon octicon-link"></span></a>options.translationVar</h4>
@@ -266,34 +640,26 @@ Default value: <code>false</code></p>
 <p>Should this value be set to true there will be no variable assignment inside the file, only the resulting json will be there.</p>
 
 <h2>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a name="3-contributing" class="anchor" href="#3-contributing"><span class="octicon octicon-link"></span></a>3. Contributing</h2>
 
 <p>In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using <a href="http://gruntjs.com/">Grunt</a>.</p>
 
 <h2>
-<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+<a name="4-release-history" class="anchor" href="#4-release-history"><span class="octicon octicon-link"></span></a>4. Release History</h2>
 
 <p><em>(Nothing yet)</em></p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/cainaf/translate-compile/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/cainaf/translate-compile/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/cainaf/translate-compile"></a> is maintained by <a href="https://github.com/cainaf">cainaf</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+      </section>
     </div>
 
-            <script type="text/javascript">
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">translate-compile maintained by <a href="https://github.com/cainaf">cainaf</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -303,6 +669,7 @@ Default value: <code>false</code></p>
             pageTracker._trackPageview();
             } catch(err) {}
           </script>
+
 
   </body>
 </html>
