@@ -1,6 +1,6 @@
 /*
  * grunt-translate-compile
- * https://github.com/caina/translate-compile
+ * https://github.com/cainaf/translate-compile
  *
  * Copyright (c) 2014 Cainã Santos
  * Licensed under the MIT license.
@@ -10,7 +10,7 @@
 
 module.exports = function(grunt) {
 
-  grunt.registerMultiTask('translate_compile', 'A pre-compiler for angular-translate based on TL, a simple write-less markup designed for angular-translate.', function() {
+  grunt.registerMultiTask('translate_compile', 'A pre-compiler for angular-translate based on TL: a simple write-less markup specially designed for angular-translate.', function() {
     
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
