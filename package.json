@@ -1,7 +1,7 @@
 {
   "name": "grunt-translate-compile",
   "description": "A pre-compiler for angular-translate based on TL: a simple write-less markup specially designed for angular-translate.",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "http://cainaf.github.io/translate-compile",
   "author": {
     "name": "Cainã Santos",
@@ -37,6 +37,6 @@
     "grunt": "~0.4.5"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin", "angular-translate", "pre-compiler", "markup", "translate-compile", "tl", "angular"
   ]
 }
