@@ -1,6 +1,6 @@
 /*
  * grunt-translate-compile
- * https://github.com/cainaf/translate-compile
+ * https://github.com/angular-translate/translate-compile
  *
  * Copyright (c) 2014 Cainã Santos
  * Licensed under the MIT license.

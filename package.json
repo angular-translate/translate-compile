@@ -1,23 +1,23 @@
 {
   "name": "grunt-translate-compile",
   "description": "A pre-compiler for angular-translate based on TL: a simple write-less markup specially designed for angular-translate.",
-  "version": "0.1.4",
-  "homepage": "http://cainaf.github.io/translate-compile",
+  "version": "0.1.5",
+  "homepage": "http://angular-translate.github.io/translate-compile",
   "author": {
     "name": "Cainã Santos",
     "email": "cainafsantos@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/cainaf/translate-compile.git"
+    "url": "git://github.com/angular-translate/translate-compile.git"
   },
   "bugs": {
-    "url": "https://github.com/cainaf/translate-compile/issues"
+    "url": "https://github.com/angular-translate/translate-compile/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/cainaf/translate-compile/blob/master/LICENSE-MIT"
+      "url": "https://github.com/angular-translate/translate-compile/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
