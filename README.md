@@ -20,7 +20,7 @@ grunt.loadNpmTasks('grunt-translate-compile');
 ## Translation Markup - TL
 
 The translation markup intends to drastically reduce the amount of typing needed to translate your app, by keeping it simpler and improving it's maintenance.
-To learn more about the TL markup, [please refer to the full documentation](http://cainaf.github.io/translate-compile).
+To learn more about the TL markup, [please refer to the full documentation](http://angular-translate.github.io/translate-compile).
 
 Briefing: A translation file begins with the declaration of all supported languages of your application. A custom numeric code (key) must be assigned to each one of the declared languages. In the sample that comes next, we're saying that [american english code is 1], [brazilian portuguese is 2] and [spanish from spain is 3]. Translation values are assigned directly to the language key.
 
@@ -111,7 +111,7 @@ var angTranslations = {
 Notice how the writing was significantly reduced as it's no longer needed to rewrite every key for each language, we are also skipping blocks and quotes. Thus we can focus on what really matters, the translations. Maintenance is also greatly improved, as adding a new key will no longer be a hunt for the right spot of each language.
 Equal translations are also single written as multiple language keys may be assigned to a value (checkout 'user.dropdown.edit' key).
 
-**Please refer to the [full documentation](http://cainaf.github.io/translate-compile) for more examples and capabilities.**
+**Please refer to the [full documentation](http://angular-translate.github.io/translate-compile) for more examples and capabilities.**
 
 
 ## The "translate_compile" task
