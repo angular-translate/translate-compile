@@ -215,7 +215,7 @@ Should this value be set to true there will be no variable assignment inside the
 Type: `Boolean`
 Default value: `false`
 
-Use with `options.asJson` to create a Nodejs module.
+Use with `options.asJson` for generate a Nodejs module or `options.multipleObjects` to generate a file divided in different modules per language.
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).

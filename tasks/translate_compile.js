@@ -56,12 +56,23 @@ module.exports = function(grunt) {
           compiled = JSON.stringify(compiled);
         }
       } else if(options.multipleObjects) {
-        // one variable per language
-        var tmp = '';
-        for(var language in compiled) {
-          tmp += 'var ' + language + ' = ' + JSON.stringify(compiled[language]) + ';';
+
+        if (options.moduleExports) {
+          // one variable per language
+          var tmp = '';
+          for(var language in compiled) {
+            tmp += 'module.exports.' + language + ' = ' + JSON.stringify(compiled[language]) + ';';
+          }
+          compiled = tmp;
+        } else{
+          // one variable per language
+          var tmp = '';
+          for(var language in compiled) {
+            tmp += 'var ' + language + ' = ' + JSON.stringify(compiled[language]) + ';';
+          }
+          compiled = tmp;
         }
-        compiled = tmp;
+
       } else {
         // one root variable enclosing all languages
         compiled = 'var ' + options.translationVar + ' = ' + JSON.stringify(compiled) + ';';
