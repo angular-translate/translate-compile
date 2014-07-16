@@ -11,7 +11,7 @@
 module.exports = function(grunt) {
 
   grunt.registerMultiTask('translate_compile', 'A pre-compiler for angular-translate based on TL: a simple write-less markup specially designed for angular-translate.', function() {
-    
+
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       translationVar: 'angTranslations',
@@ -47,7 +47,14 @@ module.exports = function(grunt) {
       // Handle options.
       if(options.asJson) {
         // no js variables printed
-        compiled = JSON.stringify(compiled);
+
+        if (options.moduleExports){
+          compiled = 'module.exports = ' + JSON.stringify(compiled) + ';';
+
+        }
+        else{
+          compiled = JSON.stringify(compiled);
+        }
       } else if(options.multipleObjects) {
         // one variable per language
         var tmp = '';
@@ -92,7 +99,7 @@ module.exports = function(grunt) {
 
           if(context === c.LANGUAGES) {
             // stores new declared language
-            languages[key] = value; 
+            languages[key] = value;
           } else {
             if(languages.length === 0) {
               grunt.fail.warn('No languages were declared! Line: ' + lineIndex);

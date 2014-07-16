@@ -211,6 +211,12 @@ Default value: `false`
 
 Should this value be set to true there will be no variable assignment inside the file, only the resulting json will be there.
 
+#### options.moduleExports
+Type: `Boolean`
+Default value: `false`
+
+Use with `options.asJson` to create a Nodejs module.
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
