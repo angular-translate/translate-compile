@@ -45,34 +45,21 @@ module.exports = function(grunt) {
       var compiled = compile(translations);
 
       // Handle options.
-      if(options.asJson) {
+      if (options.asJson) {
         // no js variables printed
-
-        if (options.moduleExports){
+        if (options.moduleExports) {
           compiled = 'module.exports = ' + JSON.stringify(compiled) + ';';
-
-        }
-        else{
+        } else {
           compiled = JSON.stringify(compiled);
         }
-      } else if(options.multipleObjects) {
-
-        if (options.moduleExports) {
-          // one variable per language
-          var tmp = '';
-          for(var language in compiled) {
-            tmp += 'module.exports.' + language + ' = ' + JSON.stringify(compiled[language]) + ';';
-          }
-          compiled = tmp;
-        } else{
-          // one variable per language
-          var tmp = '';
-          for(var language in compiled) {
-            tmp += 'var ' + language + ' = ' + JSON.stringify(compiled[language]) + ';';
-          }
-          compiled = tmp;
+      } else if (options.multipleObjects) {
+        // one variable per language
+        var tmp = '';
+        var prefix = options.moduleExports ? 'module.exports.' : 'var ';
+        for (var language in compiled) {
+          tmp += prefix + language + ' = ' + JSON.stringify(compiled[language]) + ';';
         }
-
+        compiled = tmp;
       } else {
         // one root variable enclosing all languages
         compiled = 'var ' + options.translationVar + ' = ' + JSON.stringify(compiled) + ';';
@@ -98,7 +85,7 @@ module.exports = function(grunt) {
       for (var lineIndex = 0; lineIndex < lines.length; lineIndex++) { // iterate over lines
 
         var line = lines[lineIndex]; // currunt line
-        if(line.replaceAll('\t', '').beginsWith(' ')) {
+        if (line.replaceAll('\t', '').beginsWith(' ')) {
           grunt.fail.warn('Please use only tabs for indentation! Line: ' + lineIndex);
         }
 
@@ -108,15 +95,15 @@ module.exports = function(grunt) {
           var key = line.substring(0, splitterIndex).replaceAll('\t', ''); // get language key
           var value = line.substring(splitterIndex + 1); // get value for key
 
-          if(context === c.LANGUAGES) {
+          if (context === c.LANGUAGES) {
             // stores new declared language
             languages[key] = value;
           } else {
-            if(languages.length === 0) {
+            if (languages.length === 0) {
               grunt.fail.warn('No languages were declared! Line: ' + lineIndex);
             }
             var keys = key.split(','); // get and iterate over the possible multi-keys applied
-            for(var keyIndex = 0; keyIndex < keys.length; keyIndex++) {
+            for (var keyIndex = 0; keyIndex < keys.length; keyIndex++) {
               // compile and store translation for language (value for key)
               var prop = languages[keys[keyIndex].trim()] + '.' + context;
               assign(compiled, prop, value);
@@ -134,7 +121,7 @@ module.exports = function(grunt) {
             // treats tabs indentation
             var indentation = line.split('\t').length - 1;
             var actualDots = context.split('.').length - 1;
-            if(indentation <= actualDots) {
+            if (indentation <= actualDots) {
               context = context.split('.').slice(0, indentation).join('.');
             }
             // stores translation sub-key
@@ -159,19 +146,19 @@ module.exports = function(grunt) {
     }
 
     function assign(obj, prop, value) {
-        if (typeof prop === "string") {
-            prop = prop.split(".");
-        }
-        if (prop.length > 1) {
-            var e = prop.shift();
-            assign(obj[e] = Object.prototype.toString.call(obj[e]) === "[object Object]" ? obj[e] : {}, prop, value);
-        } else {
-            obj[prop[0]] = value;
-        }
+      if (typeof prop === "string") {
+        prop = prop.split(".");
+      }
+      if (prop.length > 1) {
+        var e = prop.shift();
+        assign(obj[e] = Object.prototype.toString.call(obj[e]) === "[object Object]" ? obj[e] : {}, prop, value);
+      } else {
+        obj[prop[0]] = value;
+      }
     }
 
     function tlCompatible(string) {
-      if(string.contains('\r\n')) {
+      if (string.contains('\r\n')) {
         // ensure compatible line break
         string = string.replaceAll('\r\n', '\n');
       }

@@ -76,5 +76,25 @@ exports.translate_compile = {
     test.equal(actual, expected, errorMsg + compiledFile);
 
     test.done();
+  },
+  module_exports_multiple: function(test) {
+    test.expect(1);
+
+    var compiledFile = 'test/expected/compiled-module-exports-multiple.js';
+    var actual = grunt.file.read('tmp/compiled-module-exports-multiple.js');
+    var expected = grunt.file.read(compiledFile);
+    test.equal(actual, expected, errorMsg + compiledFile);
+
+    test.done();
+  },
+  module_exports_json: function(test) {
+    test.expect(1);
+
+    var compiledFile = 'test/expected/compiled-module-exports-json.js';
+    var actual = grunt.file.read('tmp/compiled-module-exports-json.js');
+    var expected = grunt.file.read(compiledFile);
+    test.equal(actual, expected, errorMsg + compiledFile);
+
+    test.done();
   }
 };

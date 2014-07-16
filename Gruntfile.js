@@ -64,7 +64,25 @@ module.exports = function(grunt) {
         files: {
           'tmp/compiled-multi-pattern.js': ['test/fixtures/*.tl']
         }
-      }
+      },
+      module_exports_multiple: {
+        options: {
+          multipleObjects: true,
+          moduleExports: true
+        },
+        files: {
+          'tmp/compiled-module-exports-multiple.js': ['test/fixtures/*.tl']
+        }
+      },
+      module_exports_json: {
+        options: {
+          asJson: true,
+          moduleExports: true
+        },
+        files: {
+          'tmp/compiled-module-exports-json.js': ['test/fixtures/*.tl']
+        }
+      },
     },
 
     // Unit tests.
