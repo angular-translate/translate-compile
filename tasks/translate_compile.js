@@ -16,6 +16,7 @@ module.exports = function(grunt) {
     var options = this.options({
       translationVar: 'angTranslations',
       multipleObjects: false,
+      filePerLang: false,
       asJson: false
     });
 
@@ -45,33 +46,46 @@ module.exports = function(grunt) {
       var compiled = compile(translations);
 
       // Handle options.
+      if (options.filePerLang) {
+        for (var language in compiled) {
+          handleFileOptions(compiled[language], f.dest.replace('{lang}', language));
+        }
+      } else {
+        handleFileOptions(compiled, f.dest);
+      }
+
+    });
+
+    function handleFileOptions (compiledItem, fileDest) {
+      var compiled;
+
       if (options.asJson) {
         // no js variables printed
         if (options.moduleExports) {
-          compiled = 'module.exports = ' + JSON.stringify(compiled) + ';';
+          compiled = 'module.exports = ' + JSON.stringify(compiledItem) + ';';
+
         } else {
-          compiled = JSON.stringify(compiled);
+          compiled = JSON.stringify(compiledItem);
         }
-      } else if (options.multipleObjects) {
+      } else if (options.multipleObjects && !options.filePerLang) {
         // one variable per language
         var tmp = '';
         var prefix = options.moduleExports ? 'module.exports.' : 'var ';
-        for (var language in compiled) {
-          tmp += prefix + language + ' = ' + JSON.stringify(compiled[language]) + ';';
+        for (var language in compiledItem) {
+          tmp += prefix + language + ' = ' + JSON.stringify(compiledItem[language]) + ';';
         }
         compiled = tmp;
       } else {
         // one root variable enclosing all languages
-        compiled = 'var ' + options.translationVar + ' = ' + JSON.stringify(compiled) + ';';
+        compiled = 'var ' + options.translationVar + ' = ' + JSON.stringify(compiledItem) + ';';
       }
 
       // Write the destination file.
-      grunt.file.write(f.dest, compiled);
+      grunt.file.write(fileDest, compiled);
 
       // Give me five!
-      grunt.log.writeln('File "' + f.dest + '" created.');
-
-    });
+      grunt.log.writeln('File "' + fileDest + '" created.');
+    }
 
     function compile(translations) {
 
