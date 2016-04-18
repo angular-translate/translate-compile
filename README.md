@@ -236,6 +236,12 @@ Default value: `false`
 
 Use with `options.asJson` for generate a Nodejs module or `options.multipleObjects` to generate a file divided in different modules per language.
 
+#### options.coffee
+Type: `Boolean`
+Default value: `false`
+
+Convert the output file to CoffeeScript.
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 

@@ -1,3 +1,8 @@
+/**
+ * Dependencies
+ */
+js2coffee = require('js2coffee');
+
 /*
  * grunt-translate-compile
  * https://github.com/angular-translate/translate-compile
@@ -56,7 +61,7 @@ module.exports = function(grunt) {
 
     });
 
-    function handleFileOptions (compiledItem, fileDest) {
+    function handleFileOptions(compiledItem, fileDest) {
       var compiled;
 
       if (options.asJson) {
@@ -77,9 +82,23 @@ module.exports = function(grunt) {
         compiled = tmp;
       } else {
         // one root variable enclosing all languages
-        compiled = 'var ' + options.translationVar + ' = ' + JSON.stringify(compiledItem) + ';';
+        if (options.moduleExports) {
+          compiled = 'module.exports.' + options.translationVar + ' = ' + JSON.stringify(compiledItem) + ';';
+        } else {
+          compiled = 'var ' + options.translationVar + ' = ' + JSON.stringify(compiledItem) + ';';
+        }
+
       }
 
+      if (options.coffee) {
+        compiled = js2coffee.build(compiled, {
+          show_src_lineno: false,
+          indent: options.indent || "  "
+        });
+        var _path = f.dest.split(".");
+        _path[_path.length - 1] = "coffee";
+        f.dest = _path.join(".");
+      }
       // Write the destination file.
       grunt.file.write(fileDest, compiled);
 
