@@ -67,6 +67,23 @@ exports.translate_compile = {
 
     test.done();
   },
+  file_per_language: function(test) {
+    test.expect(3);
+
+    var compiledFile = 'test/expected/compiled-no-lan.json';
+    var actual = [
+      grunt.file.readJSON('tmp/compiled-multi-by-key/compiled_enUs.json'),
+      grunt.file.readJSON('tmp/compiled-multi-by-key/compiled_ptBr.json'),
+      grunt.file.readJSON('tmp/compiled-multi-by-key/compiled_esEs.json')
+    ];
+    var expected = grunt.file.readJSON(compiledFile);
+
+    test.deepEqual(actual[0], expected.enUs, errorMsg + compiledFile + "[enUs]");
+    test.deepEqual(actual[1], expected.ptBr, errorMsg + compiledFile + "[ptBr]");
+    test.deepEqual(actual[2], expected.esEs, errorMsg + compiledFile + "[esEs]");
+
+    test.done();
+  },
   multi_files_with_pattern: function(test) {
     test.expect(1);
 

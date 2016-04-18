@@ -211,6 +211,25 @@ Default value: `false`
 
 Should this value be set to true there will be no variable assignment inside the file, only the resulting json will be there.
 
+#### options.filePerLang
+Type: `Boolean`
+Default value: `false`
+
+If this values is set to `true` the translations will be split into separate files for each language.
+
+Place `{lang}` in the destination file name when using this option:
+```javascript
+files: {
+  'compiled_translation_{lang}.json': ['translations/*.tl']
+}
+```
+`{lang}` will be replaced by the corresponding language id for the file. For example if you have translations with language keys
+`"en-Us"` and `"pt-Br"` and the above file template, the following files will be generated:
+```
+compiled_translation_en-Us.json
+compiled_translation_pt-Br.json
+```
+
 #### options.moduleExports
 Type: `Boolean`
 Default value: `false`

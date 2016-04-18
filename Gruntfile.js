@@ -60,6 +60,15 @@ module.exports = function(grunt) {
           'tmp/compiled-aggregate-keys.js': ['test/fixtures/pre-compiled-country.tl', 'test/fixtures/pre-compiled-us-states.tl']
         }
       },
+      file_per_language: {
+        options: {
+          filePerLang: true,
+          asJson: true
+        },
+        files: {
+          'tmp/compiled-multi-by-key/compiled_{lang}.json': ['test/fixtures/pre-compiled-menu.tl', 'test/fixtures/pre-compiled-us-states.tl']
+        }
+      },
       multi_files_with_pattern: {
         files: {
           'tmp/compiled-multi-pattern.js': ['test/fixtures/*.tl']
