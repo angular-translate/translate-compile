@@ -1,7 +1,7 @@
 {
   "name": "grunt-translate-compile",
   "description": "A pre-compiler for angular-translate based on TL: a simple write-less markup specially designed for angular-translate.",
-  "version": "0.1.6",
+  "version": "0.2",
   "homepage": "http://angular-translate.github.io/translate-compile",
   "author": {
     "name": "Cainã Santos",
@@ -14,12 +14,10 @@
   "bugs": {
     "url": "https://github.com/angular-translate/translate-compile/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/angular-translate/translate-compile/blob/master/LICENSE-MIT"
-    }
-  ],
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/angular-translate/translate-compile/blob/master/LICENSE-MIT"
+  }],
   "engines": {
     "node": ">= 0.8.0"
   },
@@ -60,12 +58,10 @@
     "name": "cainaf",
     "email": "cainafsantos@gmail.com"
   },
-  "maintainers": [
-    {
-      "name": "cainaf",
-      "email": "cainafsantos@gmail.com"
-    }
-  ],
+  "maintainers": [{
+    "name": "cainaf",
+    "email": "cainafsantos@gmail.com"
+  }],
   "directories": {},
   "_shasum": "13861cba07bffe5f65d24bf0eb278261ce9b52b7",
   "_resolved": "https://registry.npmjs.org/grunt-translate-compile/-/grunt-translate-compile-0.1.6.tgz",
